@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Product Dashboard</title>
+    <style>
+        /* মূল ব্যাকগ্রাউন্ড এবং ফন্ট */
+        body {
+            background-color: #051937;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px; /* মোবাইল সাইজ */
+        }
+
+        /* কার্ডের মূল ডিজাইন */
+        .card {
+            background: linear-gradient(180deg, #102a50 0%, #07162d 100%);
+            border-radius: 20px;
+            padding: 15px;
+            border: 1px solid #1e3a8a;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* উপরের গোল্ডেন সেকশন */
+        .header-box {
+            background: linear-gradient(90deg, #1a1a1a 0%, #333 100%);
+            border-radius: 15px;
+            padding: 15px;
+            position: relative;
+            border: 1px solid #444;
+        }
+
+        .store-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .subtitle {
+            color: #ffd700; /* গোল্ডেন কালার */
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        /* স্ট্যাটাস গ্রিড (অর্ডার, আয়) */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #444;
+            padding: 8px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        /* প্রাইস এবং রিটার্ন সেকশন */
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .info-box {
+            width: 48%;
+        }
+
+        .label { color: #8892b0; font-size: 12px; }
+        .value { 
+            color: #3498db; 
+            font-size: 18px; 
+            font-weight: bold; 
+            margin-top: 5px; 
+        }
+
+        /* ইনভেস্ট বাটন */
+        .invest-btn {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .invest-btn:hover {
+            background: #2563eb;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <div class="header-box">
+            <p class="store-title">V1 Store</p>
+            <p class="subtitle">৳১,৫০০ দোকানের জামানত</p>
+            
+            <div class="stats-grid">
+                <div class="stat-item">৩<br>অর্ডার</div>
+                <div class="stat-item">৳ ৩৫<br>দৈনিক আয়</div>
+                <div class="stat-item">৳ ১,০৫০<br>মাসিক আয়</div>
+            </div>
+        </div>
+
+        <div class="info-row">
+            <div class="info-box">
+                <div class="label">Price</div>
+                <div class="value">BDT 1,500.00</div>
+            </div>
+            <div class="info-box">
+                <div class="label">Returns</div>
+                <div class="value" style="color: #4fc3f7;">2.33%</div>
+            </div>
+        </div>
+
+        <button class="invest-btn">Invest Now</button>
+    </div>
+</div>
+
+</body>
+</html>
+
