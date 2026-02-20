@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Dashboard Final</title>
+    <style>
+        :root {
+            --primary-bg: #001f3f;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --accent-color: #ffcc00;
+            --profit-color: #00ffcc;
+            --success: #28a745;
+            --danger: #dc3545;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--primary-bg);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* হেডার বাটন সেকশন */
+        .header-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .action-box {
+            text-align: center;
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 15px;
+            width: 140px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .main-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .deposit-btn { background: var(--success); color: white; }
+        .withdraw-btn { background: var(--danger); color: white; }
+
+        /* টাইমার */
+        .timer-display {
+            margin-top: 30px;
+            font-size: 2rem;
+            font-weight: bold;
+            background: #007bff;
+            padding: 8px 35px;
+            border-radius: 50px;
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+        }
+
+        /* মেইন স্ট্যাটাস */
+        .center-stats {
+            margin-top: 35px;
+            text-align: center;
+            width: 90%;
+        }
+
+        .stat-group { margin-bottom: 25px; }
+
+        .label { font-size: 0.9rem; color: #aaa; margin-bottom: 5px; }
+        
+        .main-balance {
+            font-size: 2.8rem; /* সাইজ ছোট করা হয়েছে */
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .daily-profit {
+            display: inline-block;
+            font-size: 1.1rem;
+            border: 1px solid #00aaff;
+            padding: 8px 25px;
+            border-radius: 10px;
+            background: rgba(0, 170, 255, 0.1);
+        }
+
+        /* নতুন প্রাপ্ত আয় সেকশন */
+        .earned-box {
+            margin-top: 20px;
+            background: rgba(0, 255, 204, 0.1);
+            border: 1px dashed var(--profit-color);
+            padding: 15px;
+            border-radius: 15px;
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .earned-amount {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--profit-color);
+        }
+
+        /* পপ-আপ (Modal) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: #1a1a1a;
+            width: 85%;
+            max-width: 350px;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+
+        .method-select {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .method-option {
+            cursor: pointer;
+            padding: 8px;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            background: #222;
+        }
+
+        .method-option.active { border-color: var(--accent-color); }
+        .method-option img { width: 45px; border-radius: 5px; }
+
+        .fixed-amount-box {
+            background: #333;
+            padding: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .confirm-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--accent-color);
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <div class="action-box">
+            <button class="main-btn deposit-btn" onclick="openModal('deposit')">ডিপোজিট</button>
+            <small>বিকাশ / নগদ</small>
+        </div>
+        <div class="action-box">
+            <button class="main-btn withdraw-btn" onclick="openModal('withdraw')">উইথড্র</button>
+            <small>বিকাশ / নগদ</small>
+        </div>
+    </div>
+
+    <div class="timer-display" id="timer">24:00:00</div>
+
+    <div class="center-stats">
+        <div class="stat-group">
+            <div class="label">মোট ব্যালেন্স (ফিক্সড)</div>
+            <div class="main-balance">৳ ১০০০</div>
+        </div>
+
+        <div class="stat-group">
+            <div class="daily-profit">দৈনিক আয়: ৳ ২২৫</div>
+        </div>
+
+        <div class="earned-box">
+            <div class="label" style="color: var(--profit-color);">প্রাপ্ত আয়</div>
+            <div class="earned-amount" id="earnedIncome">০</div>
+        </div>
+    </div>
+
+    <div id="actionModal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle">ডিপোজিট</h3>
+            <div class="method-select">
+                <div class="method-option active" onclick="selectMethod(this)">
+                    <img src="https://img.icons8.com/color/48/000000/b-kash.png" alt="Bkash">
+                    <div style="font-size: 10px;">বিকাশ</div>
+                </div>
+                <div class="method-option" onclick="selectMethod(this)">
+                    <img src="https://img.icons8.com/color/48/000000/nagad.png" alt="Nagad">
+                    <div style="font-size: 10px;">নগদ</div>
+                </div>
+            </div>
+            <div class="fixed-amount-box" id="fixedAmount">৳ ১০০০</div>
+            <button class="confirm-btn" onclick="processAction()">নিশ্চিত করুন</button>
+            <p onclick="closeModal()" style="color: #666; cursor: pointer; margin-top: 15px;">বন্ধ করুন</p>
+        </div>
+    </div>
+
+    <script>
+        let totalEarned = 0;
+        let totalSeconds = 24 * 60 * 60;
+
+        // টাইমার ও অটো-ইনকাম লজিক
+        function updateTimer() {
+            let h = Math.floor(totalSeconds / 3600);
+            let m = Math.floor((totalSeconds % 3600) / 60);
+            let s = totalSeconds % 60;
+
+            document.getElementById('timer').textContent = 
+                `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            
+            if (totalSeconds > 0) {
+                totalSeconds--;
+            } else {
+                // ২৪ ঘণ্টা শেষ হলে প্রাপ্ত আয়ে ২২৫ টাকা যোগ হবে
+                totalEarned += 225;
+                document.getElementById('earnedIncome').textContent = totalEarned;
+                totalSeconds = 24 * 60 * 60; // টাইমার রিসেট
+            }
+        }
+
+        setInterval(updateTimer, 1000);
+
+        // পপ-আপ ফাংশন
+        function openModal(type) {
+            document.getElementById('actionModal').style.display = 'flex';
+            if(type === 'deposit') {
+                document.getElementById('modalTitle').innerText = 'ডিপোজিট';
+                document.getElementById('fixedAmount').innerText = '৳ ১০০০';
+            } else {
+                document.getElementById('modalTitle').innerText = 'উইথড্র';
+                document.getElementById('fixedAmount').innerText = '৳ ৭০০';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('actionModal').style.display = 'none';
+        }
+
+        function selectMethod(el) {
+            document.querySelectorAll('.method-option').forEach(opt => opt.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function processAction() {
+            const type = document.getElementById('modalTitle').innerText;
+            const amount = (type === 'ডিপোজিট') ? '১০০০' : '৭০০';
+            alert(`${type} রিকোয়েস্ট পাঠানো হয়েছে: ৳${amount}`);
+            closeModal();
+        }
+    </script>
+
+</body>
+</html>
