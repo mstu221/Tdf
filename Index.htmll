@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আবেদন ফরম - নং ৭৯</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .form-container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #1a73e8;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #f0f2f5;
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        input[type="text"], 
+        input[type="tel"], 
+        input[type="url"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box; /* padding সহ সঠিক মাপ রাখার জন্য */
+            font-size: 14px;
+        }
+        input[type="file"] {
+            margin-top: 5px;
+        }
+        .fee-info {
+            background: #e8f0fe;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+            color: #1967d2;
+        }
+        .submit-btn {
+            width: 100%;
+            background-color: #1a73e8;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #1557b0;
+        }
+        .form-footer {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>আবেদন ফরম</h2>
+    
+    <form action="#" method="post" enctype="multipart/form-data">
+        
+        <div class="form-group">
+            <label>আপনার নাম :</label>
+            <input type="text" placeholder="আপনার পূর্ণ নাম লিখুন" required>
+        </div>
+
+        <div class="form-group">
+            <label>আপনার মোবাইল নাম্বার :</label>
+            <input type="tel" placeholder="০১৮XXXXXXXX" required>
+        </div>
+
+        <div class="form-group">
+            <label>আপনার ১ টি ছবি :</label>
+            <input type="file" accept="image/*" required>
+        </div>
+
+        <div class="form-group">
+            <label>আপনি কোন কোন ভাষায় টাইপিং করতে পারেন :</label>
+            <input type="text" placeholder="উদা: বাংলা, ইংরেজি" required>
+        </div>
+
+        <div class="form-group">
+            <label>আপনার ফেসবুক আইডির লিংক :</label>
+            <input type="url" placeholder="https://facebook.com/yourid" required>
+        </div>
+
+        <div class="fee-info">
+            ফরম নং : ৭৯ <br>
+            ফরম ফি : ২৯৯ টাকা
+        </div>
+
+        <button type="submit" class="submit-btn">সাবমিট করুন</button>
+    </form>
+
+    <div class="form-footer">
+        © ২০২৬ আপনার ওয়েবসাইট | সকল তথ্য নিরাপদ।
+    </div>
+</div>
+
+</body>
+</html>
